@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ config.title }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
+  <link rel="stylesheet" href="{{ get_url(path='style.css') | safe }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml') | safe }}">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.extra.ga_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ config.extra.ga_id }}');
+  </script>
+</head>
+<body>
+  <nav>
+    <a class="logo" href="{{ config.base_url | safe }}">{{ config.title }}</a>
+    <ul>
+      <li><a href="/posts/">Writing</a></li>
+      <li><a href="/about/">About</a></li>
+    </ul>
+  </nav>
+
+  {% block content %}{% endblock %}
+
+  <footer class="site-footer">
+    <span>&copy; {{ now() | date(format="%Y") }} {{ config.extra.author }}</span>
+    <span>
+      <a href="{{ config.extra.github | safe }}">GitHub</a>
+      &nbsp;&middot;&nbsp;
+      <a href="{{ config.extra.linkedin | safe }}">LinkedIn</a>
+    </span>
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,291 @@
+@import "tufte";
+
+// ---- Layout reset ----
+// Tufte CSS constrains body to 87.5% width with 12.5% left padding.
+// We override here and move that column treatment to <article> so that
+// full-bleed sections (hero, nav, footer) can span the full viewport.
+// Also reduce base font from 15px (Tufte default) to 13px — Tufte was
+// designed for print; at screen resolution 15px makes body text ~21px.
+html { font-size: 13px; }
+
+body {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 0;
+}
+
+// Reduce body copy and list text within articles (was 1.4rem = 21px)
+article p,
+article ol,
+article ul,
+article table { font-size: 1.2rem; line-height: 1.9rem; }
+
+// Tighten list item spacing and reduce heading sizes ~20%
+article li { padding: 0.15rem 0; }
+article h1 { font-size: 2.55rem; }
+article h2 { font-size: 1.75rem; }
+article h3 { font-size: 1.4rem; }
+
+article {
+  width: 87.5%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 12.5%;
+  box-sizing: border-box;
+}
+
+// ---- Variables ----
+$sepia:   #fffff8;
+$ink:     #111111;
+$muted:   #555555;
+$gold:    #b5945b;
+$rule:    #e0d8cc;
+$max-w:   680px;
+
+// ---- Reset body for homepage sections ----
+// Tufte sets body padding-left: 12.5%; we override for nav/hero/footer
+// and re-apply for content sections.
+
+// ---- Nav ----
+nav {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 5%;
+  width: 100%;
+  box-sizing: border-box;
+
+  .logo {
+    font-family: et-book, Palatino, "Palatino Linotype", Georgia, serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    color: $ink;
+    text-decoration: none;
+    opacity: 0.75;
+    background: none;
+    text-shadow: none;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 28px;
+    width: auto;
+    padding: 0;
+    margin: 0;
+
+    li { padding: 0; }
+
+    li a {
+      font-family: et-book, Palatino, "Palatino Linotype", Georgia, serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      color: $muted;
+      text-decoration: none;
+      background: none;
+      text-shadow: none;
+
+      &:hover { color: $ink; }
+    }
+  }
+}
+
+// ---- Hero ----
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  background: $sepia;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  // gradient mask: fades wave into background at top of wave zone
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, $sepia 0%, transparent 40%);
+    z-index: 2;
+    pointer-events: none;
+  }
+}
+
+#wave-canvas {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 200px;
+  z-index: 1;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding-bottom: 80px; // lift above wave zone
+
+  h1 {
+    font-family: et-book, Palatino, "Palatino Linotype", Georgia, serif;
+    font-size: 2.6rem;
+    font-weight: normal;
+    letter-spacing: 0.04em;
+    color: $ink;
+    margin: 0 0 0.5rem;
+    line-height: 1;
+  }
+
+  .hero-rule {
+    width: 48px;
+    height: 1px;
+    background: $gold;
+    margin: 12px auto;
+  }
+
+  p {
+    font-family: et-book, Palatino, "Palatino Linotype", Georgia, serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: $muted;
+    margin: 0;
+    width: auto;
+    line-height: 1.5;
+  }
+}
+
+// ---- Main content wrapper ----
+.content-wrap {
+  max-width: $max-w;
+  margin: 0 auto;
+  padding: 52px 24px 80px;
+  // override tufte's body padding for this container
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// ---- About blurb ----
+.about-blurb {
+  padding-bottom: 40px;
+  border-bottom: 1px solid $rule;
+  margin-bottom: 48px;
+
+  p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: $ink;
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+// ---- Post list ----
+.posts-label {
+  font-family: et-book, Palatino, "Palatino Linotype", Georgia, serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $muted;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.post-list {
+  border-top: 1px solid $rule;
+}
+
+.post-list-item {
+  padding: 0;
+  border-bottom: 1px solid $rule;
+}
+
+.post-list-item a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 14px 0;
+  text-decoration: none;
+  background: none;
+  text-shadow: none;
+  color: inherit;
+
+  &:hover .post-title { color: darken($gold, 10%); }
+}
+
+.post-title {
+  font-family: et-book, Palatino, "Palatino Linotype", Georgia, serif;
+  font-size: 1.05rem;
+  color: $ink;
+  transition: color 0.15s;
+}
+
+.post-date {
+  font-family: et-book, Palatino, "Palatino Linotype", Georgia, serif;
+  font-size: 0.82rem;
+  color: $muted;
+  font-style: italic;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+// ---- Post page ----
+.post-header {
+  padding-top: 5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $rule;
+  margin-bottom: 2rem;
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-meta {
+    font-size: 1.0rem;
+    font-style: italic;
+    color: $muted;
+    width: auto;
+    margin: 0;
+  }
+}
+
+// ---- Generic page ----
+.page-content {
+  padding-top: 5rem;
+
+  h1 { margin-top: 0; }
+}
+
+// ---- Footer ----
+.site-footer {
+  border-top: 1px solid $rule;
+  padding: 24px 5%;
+  display: flex;
+  justify-content: space-between;
+  font-family: et-book, Palatino, "Palatino Linotype", Georgia, serif;
+  font-size: 0.82rem;
+  color: $muted;
+  width: 100%;
+  box-sizing: border-box;
+
+  a {
+    color: $muted;
+    text-decoration: none;
+    background: none;
+    text-shadow: none;
+    &:hover { color: $ink; }
+  }
+}

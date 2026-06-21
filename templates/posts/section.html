@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Writing &mdash; {{ config.title }}{% endblock %}
+
+{% block content %}
+<article>
+  <div class="post-header" style="border-bottom: none; margin-bottom: 1rem;">
+    <h1>Writing</h1>
+  </div>
+  <ul class="post-list" style="padding-top: 0;">
+    {% for page in section.pages %}
+    <li class="post-list-item">
+      <a href="{{ page.permalink | safe }}">
+        <span class="post-title">{{ page.title }}</span>
+        <span class="post-date">{{ page.date | date(format="%B %Y") }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</article>
+{% endblock %}

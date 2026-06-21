@@ -1,0 +1,18 @@
+base_url = "https://mitchellallain.com"
+title = "Mitchell Allain"
+description = "Robotics software engineer writing about systems, controls, and software."
+compile_sass = true
+build_search_index = false
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+
+[markdown]
+highlighting.highlight_code = true
+highlighting.theme = "github-light"
+
+[extra]
+author = "Mitchell Allain"
+tagline = "Robotics Software Engineer &mdash; writing about systems, controls, and software."
+github = "https://github.com/mitchallain"
+linkedin = "https://linkedin.com/in/mitchellallain"
+ga_id = "G-N9G5289DKX"
