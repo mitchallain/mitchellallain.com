@@ -94,42 +94,11 @@ nav {
   }
 }
 
-// ---- Hero ----
-.hero {
-  position: relative;
-  width: 100%;
-  min-height: 420px;
-  background: $sepia;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-
-  // gradient mask: fades wave into background at top of wave zone
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 200px;
-    background: linear-gradient(to bottom, $sepia 0%, transparent 40%);
-    z-index: 2;
-    pointer-events: none;
-  }
-}
-
-#wave-canvas {
-  position: absolute;
-  bottom: 0; left: 0;
-  width: 100%;
-  height: 200px;
-  z-index: 1;
-}
-
-.hero-copy {
-  position: relative;
-  z-index: 10;
-  text-align: center;
-  padding-bottom: 80px; // lift above wave zone
+// ---- Home header ----
+.home-header {
+  padding-top: 28px;
+  padding-bottom: 48px;
+  margin-bottom: 48px;
 
   h1 {
     font-family: et-book, Palatino, "Palatino Linotype", Georgia, serif;
@@ -145,10 +114,10 @@ nav {
     width: 48px;
     height: 1px;
     background: $gold;
-    margin: 12px auto;
+    margin: 12px 0;
   }
 
-  p {
+  .tagline {
     font-family: et-book, Palatino, "Palatino Linotype", Georgia, serif;
     font-size: 1.1rem;
     font-style: italic;
@@ -200,10 +169,6 @@ nav {
   padding: 0;
   margin: 0;
   width: 100%;
-}
-
-.post-list {
-  border-top: 1px solid $rule;
 }
 
 .post-list-item {

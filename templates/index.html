@@ -1,16 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="hero">
-  <canvas id="wave-canvas"></canvas>
-  <div class="hero-copy">
+<main class="content-wrap">
+  <div class="home-header">
     <h1>{{ config.title }}</h1>
     <div class="hero-rule"></div>
-    <p>{{ config.extra.tagline | safe }}</p>
+    <p class="tagline">{{ config.extra.tagline | safe }}</p>
   </div>
-</section>
 
-<main class="content-wrap">
   {% if section.content %}
   <div class="about-blurb">
     {{ section.content | safe }}
@@ -30,59 +27,4 @@
     {% endfor %}
   </ul>
 </main>
-{% endblock %}
-
-{% block scripts %}
-<script src="{{ get_url(path='js/three.min.js') | safe }}"></script>
-<script>
-(function () {
-  var canvas = document.getElementById('wave-canvas');
-  if (!canvas || typeof THREE === 'undefined') return;
-
-  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-  renderer.setClearColor(0xfffff8, 1);
-
-  var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
-  camera.position.set(0, 0.5, 3.2);
-  camera.lookAt(0, 0, -2);
-
-  var geo = new THREE.PlaneGeometry(12, 10, 65, 40);
-  geo.rotateX(-Math.PI / 2);
-  var mat = new THREE.MeshBasicMaterial({
-    color: 0xb5945b,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.45
-  });
-  scene.add(new THREE.Mesh(geo, mat));
-
-  function resize() {
-    var w = canvas.parentElement.offsetWidth;
-    var h = 200;
-    renderer.setSize(w, h, false);
-    canvas.style.width = '100%';
-    canvas.style.height = h + 'px';
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-  }
-
-  resize();
-  window.addEventListener('resize', resize);
-
-  var t = 0;
-  var pos = geo.attributes.position;
-  (function loop() {
-    requestAnimationFrame(loop);
-    t += 0.022;
-    for (var i = 0; i < pos.count; i++) {
-      var x = pos.getX(i);
-      var z = pos.getZ(i);
-      pos.setY(i, Math.sin(z * 1.9 + t) * 0.28 + Math.sin(x * 0.9 + t * 0.55) * 0.1);
-    }
-    pos.needsUpdate = true;
-    renderer.render(scene, camera);
-  })();
-})();
-</script>
 {% endblock %}
